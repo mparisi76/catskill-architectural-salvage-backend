@@ -14,6 +14,7 @@
     "postinstall": "npx patch-package",
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "start": "turbo run build",
     "format": "turbo run format",
     "lint": "turbo run lint",
     "codegen": "turbo run codegen",
