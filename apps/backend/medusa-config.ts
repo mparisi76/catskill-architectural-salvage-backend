@@ -5,6 +5,7 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
+    worker_mode: process.env.MEDUSA_WORKER_MODE,
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
@@ -15,6 +16,17 @@ module.exports = defineConfig({
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret'
     }
   },
+  plugins: [
+    // ...
+    {
+      resolve: "@medusajs/admin",
+      /** @type {import('@medusajs/admin').PluginOptions} */
+      options: {
+        autoRebuild: true,
+        // other options...
+      },
+    },
+  ],
   modules: [
     { resolve: './src/modules/seller' },
     { resolve: './src/modules/marketplace' },
