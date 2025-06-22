@@ -14704,6 +14704,12 @@ export interface Order {
    * Whether the order is a draft order.
    */
   is_draft_order?: boolean;
+  /**
+   * deleted_at
+   * The date the order was deleted.
+   * @format date-time
+   */
+  deleted_at?: string;
 }
 
 /** The address's details. */
@@ -36888,6 +36894,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         secure: true,
         type: ContentType.Json,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a draft order.
+     *
+     * @tags Admin Draft Orders
+     * @name AdminDeleteDraftOrdersId
+     * @summary Delete a Draft Order
+     * @request DELETE:/admin/draft-orders/{id}
+     * @secure
+     */
+    adminDeleteDraftOrdersId: (id: string, params: RequestParams = {}) =>
+      this.request<void, Error | string>({
+        path: `/admin/draft-orders/${id}`,
+        method: "DELETE",
+        secure: true,
         ...params,
       }),
 
